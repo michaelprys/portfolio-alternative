@@ -132,24 +132,46 @@ const handleTurnPage = (page) => {
 }
 
 @media (width <= $screen-sm) {
-    .experience__item {
-        margin-bottom: 6px;
+    .experience {
+        &__item {
+            margin-bottom: 0.25rem;
+        }
+        &__list {
+            li {
+                margin-bottom: 0;
+                font-size: 0.75rem;
+                line-height: 1.2;
+            }
+        }
     }
-    .experience__list li,
-    .communication__grid li {
-        font-size: 0.75rem;
-        line-height: 1.2;
+    .communication {
+        margin-top: 0.8rem;
+        &__grid {
+            gap: 2px $g-4;
+            li {
+                font-size: 0.75rem;
+                line-height: 1.1;
+            }
+        }
     }
     .subtitle {
         font-size: 0.85rem;
         margin: 2px 0;
+        &--languages {
+            margin-bottom: 0;
+        }
     }
     .title--about {
         font-size: 1rem;
-        margin-bottom: 6px;
+        margin-bottom: 0.5rem;
     }
-    .communication {
-        margin-top: 8px;
+    .year {
+        font-size: 0.8rem;
+        gap: 4px;
+        svg {
+            width: 0.8rem;
+            height: 0.8rem;
+        }
     }
 }
 </style>

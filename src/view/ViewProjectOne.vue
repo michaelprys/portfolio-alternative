@@ -18,8 +18,6 @@
                                 @mouseleave="pauseVideo"
                                 class="project__img"
                                 src="@img/content/zigzags-workshop.jpg"
-                                width="256px"
-                                height="136px"
                                 alt="zigzags-workshop app" />
                         </picture>
                     </div>
@@ -81,12 +79,9 @@ import { usePlayVideo } from '@/use/usePlayVideo';
 import { useWindowSize } from '@vueuse/core';
 import { inject } from 'vue';
 const { video, playVideo, pauseVideo } = usePlayVideo();
-
 const { width: windowWidth } = useWindowSize();
-
 defineProps(['dropPage']);
 const turnPage = inject('turnPage');
-
 const handleTurnPage = (page) => {
     turnPage(page);
 };
@@ -99,33 +94,45 @@ const handleTurnPage = (page) => {
         align-items: center;
         justify-content: space-between;
     }
-    &__video {
-        margin-top: $m-6;
-        border-radius: $br-4;
-        width: $w-64;
-        margin-inline: auto;
-        border: 8px solid rgba($c-text, 10%);
-        transition: box-shadow $tr-smooth;
-        box-shadow: 0 0 12.8px rgba(0, 0, 0, 0.3);
-        filter: grayscale(40%);
-        &:hover {
-            box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
-        }
-    }
     &__link {
+        display: block;
+        width: fit-content;
         margin-inline: auto;
     }
     &__demo-wrapper {
         position: relative;
+        overflow: hidden;
+        border-radius: $br-4;
+        width: $w-64;
+        height: 160.45px;
+        margin-top: 1rem;
+        box-sizing: border-box;
+    }
+    &__video {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        border: 8px solid rgba(83, 83, 83, 0.1);
+        box-sizing: border-box;
+        border-radius: $br-4;
+        filter: grayscale(40%);
+        transition: box-shadow $tr-smooth;
+        box-shadow: 0 0 12.8px rgba(0, 0, 0, 0.3);
+        &:hover {
+            box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
+        }
     }
     &__img {
         position: absolute;
-        filter: grayscale(60%);
-        border: 8px solid rgba($c-text, 0%);
-        top: 50%;
-        left: 50%;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         object-fit: cover;
-        transform: translateY(-50%) translateX(-50%);
+        box-sizing: border-box;
+        border: 8px solid transparent;
+        filter: grayscale(60%);
         transition: opacity $tr-smooth;
         &:hover {
             opacity: 0;
@@ -177,8 +184,7 @@ const handleTurnPage = (page) => {
             transform: scale(1);
         }
     }
-    &__btn,
-    &__more-projects-btn {
+    &__btn {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -186,53 +192,27 @@ const handleTurnPage = (page) => {
         color: $c-text;
         border-radius: $br-6;
         background-color: #e3e3e37b;
-        @include btn-big;
-    }
-    &__btn {
         width: $w-20;
-    }
-    &__more-projects-btn {
-        width: 8.5rem;
-    }
-    &__btn,
-    &__more-projects-btn {
         padding: $p-2;
+        @include btn-big;
     }
 }
 
 @media (width <= $screen-sm) {
     .project {
         &__demo-wrapper {
-            padding-inline: 4rem;
+            width: 135px;
+            height: 75.72px;
+            margin-top: $m-4;
         }
-        &__video {
-            margin-top: $m-5;
-        }
+        &__video,
         &__img {
-            height: 100%;
-        }
-        &__name {
-            font-size: $fs-h6;
+            border-width: 8px;
         }
         &__info {
-            font-size: 0.875rem;
+            margin-top: $m-3;
+            gap: $g-1;
         }
-        &__tech,
-        &__description-heading,
-        &__description {
-            font-size: 0.875rem;
-        }
-        &__code-btn,
-        &__more-projects-btn {
-            font-size: $fs-smaller;
-            padding-block: 0.125rem;
-            margin-top: $m-3_5;
-        }
-    }
-}
-
-@media (width >= $screen-xs) and (width <= $screen-sm) {
-    .project {
         &__name {
             font-size: $fs-base;
         }
@@ -240,41 +220,34 @@ const handleTurnPage = (page) => {
         &__description-heading,
         &__description {
             font-size: 0.75rem;
+            line-height: 1.4;
+        }
+        &__description {
+            display: -webkit-box;
+            -webkit-line-clamp: 6;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
             text-align: justify;
         }
-        &__code-btn,
-        &__more-projects-btn {
-            padding-block: 0.1rem;
-            margin-top: $m-3_5;
+        &__btn {
+            margin-top: $m-4;
+            padding-block: 0.25rem;
+            font-size: $fs-small;
         }
     }
 }
+
 @media (width <= $screen-xs) {
     .project {
-        &__name {
-            font-size: $fs-small;
+        &__demo-wrapper {
+            width: 135px;
+            height: 75.72px;
         }
-        &__info {
-            font-size: 0.8rem;
-        }
-        &__demo-icon {
-            width: 1.2rem;
-            height: 1.2rem;
-        }
-        &__tech,
-        &__description-heading,
         &__description {
-            font-size: 0.7rem;
-            text-align: justify;
-            margin-top: 0;
-            line-height: 1.6;
+            -webkit-line-clamp: 4;
         }
-        &__code-btn,
-        &__more-projects-btn {
-            width: 6rem;
-            padding-block: 0;
-            font-size: 0.65rem;
-            margin-top: $m-3_5;
+        &__btn {
+            margin-top: $m-2;
         }
     }
 }

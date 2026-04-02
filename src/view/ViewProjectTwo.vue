@@ -17,8 +17,6 @@
                                 @mouseover="playVideo"
                                 @mouseleave="pauseVideo"
                                 class="project__img"
-                                width="258px"
-                                height="139px"
                                 src="@img/content/lows-n-lines.jpg"
                                 alt="Lows n Lines app" />
                         </picture>
@@ -52,7 +50,7 @@
                         </p>
                     </div>
                     <div class="project__wrapper">
-                        <span class="project__btn project__btn--soon">Coming soon</span>
+                        <span class="project__btn project__btn--soon">In development</span>
                     </div>
                 </div>
             </div>
@@ -89,9 +87,177 @@ const handleTurnPage = (page) => {
 </script>
 
 <style lang="scss">
-.project__btn--soon {
-    background-color: gray;
-    width: $w-32;
-    pointer-events: none;
+.project {
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &__link {
+        display: block;
+        width: fit-content;
+        margin-inline: auto;
+    }
+    &__demo-wrapper {
+        position: relative;
+        overflow: hidden;
+        border-radius: $br-4;
+        width: $w-64;
+        height: 160.45px;
+        box-sizing: border-box;
+    }
+    &__video {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        border: 8px solid rgba(83, 83, 83, 0.1);
+        box-sizing: border-box;
+        border-radius: $br-4;
+        filter: grayscale(40%);
+        transition: box-shadow $tr-smooth;
+        box-shadow: 0 0 12.8px rgba(0, 0, 0, 0.3);
+        &:hover {
+            box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
+        }
+    }
+    &__img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        box-sizing: border-box;
+        border: 8px solid transparent;
+        filter: grayscale(60%);
+        transition: opacity $tr-smooth;
+        &:hover {
+            opacity: 0;
+        }
+    }
+    &__name {
+        font-size: $fs-h4;
+    }
+    &__info {
+        margin-top: $m-5;
+        display: flex;
+        flex-direction: column;
+        gap: $g-2;
+    }
+    &__tech {
+        margin-top: $m-2;
+    }
+    &__tech span,
+    &__description-heading {
+        font-weight: bold;
+    }
+    &__tech,
+    &__description-heading,
+    &__description {
+        font-size: $fs-medium;
+    }
+    &__demo {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: $g-2;
+        color: $c-text;
+        transition: fill $tr-basic;
+        & svg {
+            fill: $c-text;
+        }
+        &::after {
+            position: absolute;
+            content: '';
+            width: 100%;
+            height: 0.125rem;
+            background-color: rgba($c-text, 65%);
+            bottom: -0.125rem;
+            transform: scaleX(0);
+            transition: transform $tr-fast;
+            transform-origin: left;
+        }
+        &:hover::after {
+            transform: scale(1);
+        }
+    }
+    &__btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: $m-7;
+        color: $c-text;
+        border-radius: $br-6;
+        background-color: #e3e3e37b;
+        width: $w-20;
+        padding: $p-2;
+        @include btn-big;
+
+        &--soon {
+            background-color: gray;
+            width: $w-32;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+    }
+}
+
+@media (width <= $screen-sm) {
+    .project {
+        &__demo-wrapper {
+            width: 135px;
+            height: 75.72px;
+            margin-top: $m-4;
+        }
+        &__video,
+        &__img {
+            border-width: 8px;
+        }
+        &__info {
+            margin-top: $m-3;
+            gap: $g-1;
+        }
+        &__name {
+            font-size: $fs-base;
+        }
+        &__tech,
+        &__description-heading,
+        &__description {
+            font-size: 0.75rem;
+            line-height: 1.4;
+        }
+        &__description {
+            display: -webkit-box;
+            -webkit-line-clamp: 6;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-align: justify;
+        }
+        &__btn {
+            margin-top: $m-4;
+            padding-block: 0.25rem;
+            font-size: $fs-small;
+
+            &--soon {
+                width: $w-32;
+            }
+        }
+    }
+}
+
+@media (width <= $screen-xs) {
+    .project {
+        &__demo-wrapper {
+            width: 135px;
+            height: 75.72px;
+        }
+        &__description {
+            -webkit-line-clamp: 4;
+        }
+        &__btn {
+            margin-top: $m-2;
+        }
+    }
 }
 </style>

@@ -190,8 +190,13 @@ const cvLink = import.meta.env.VITE_CV_URL;
     &__link,
     &__button {
         @include btn-big;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         padding-block: $p-2;
         padding-inline: $p-4;
+        text-decoration: none;
+        box-sizing: border-box;
     }
 }
 
