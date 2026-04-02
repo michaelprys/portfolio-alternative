@@ -1,6 +1,6 @@
 <template>
     <button @click="handlePlaySfx">
-        <slot> </slot>
+        <slot></slot>
     </button>
 </template>
 
@@ -11,20 +11,24 @@ import Sfx3 from '@/assets/sounds/page-turn-3.mp3?url';
 import Sfx4 from '@/assets/sounds/page-turn-4.mp3?url';
 import Sfx5 from '@/assets/sounds/page-turn-5.mp3?url';
 import { usePlaySfx } from '@/use/usePlaySfx';
+import { inject, ref } from 'vue';
 
 const { playSfx } = usePlaySfx();
+
+const isAnimationInProgress = inject('isAnimationInProgress');
 
 const sounds = [Sfx1, Sfx2, Sfx3, Sfx4, Sfx5];
 let previousSound;
 
 const getSound = () => {
-    const filteredSounds = sounds.filter(sound => sound !== previousSound);
-    return (previousSound =
-        filteredSounds[Math.floor(Math.random() * filteredSounds.length)]);
+    const filteredSounds = sounds.filter((sound) => sound !== previousSound);
+    return (previousSound = filteredSounds[Math.floor(Math.random() * filteredSounds.length)]);
 };
 
 const handlePlaySfx = () => {
-    playSfx(getSound());
+    if (!isAnimationInProgress.value) {
+        playSfx(getSound());
+    }
 };
 </script>
 

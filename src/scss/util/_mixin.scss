@@ -13,15 +13,15 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    flex-shrink: 0;
 }
 
 @mixin btn-big {
     border-radius: $br-6;
     background-color: $c-cover;
     color: $c-warm;
-    font-size: $fs-medium;
-    transition: background-color $tr-smooth, border-color $tr-smooth,
+    transition:
+        background-color $tr-smooth,
+        border-color $tr-smooth,
         color $tr-smooth;
     border: 2px solid transparent;
     font-family: $ff-primary;

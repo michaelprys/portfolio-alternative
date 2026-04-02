@@ -1,9 +1,7 @@
 <template>
     <div class="book__content book__content--right">
         <div class="book__content-inner">
-            <h2 class="end-title">
-                Programming is not a science. Programming is a craft.
-            </h2>
+            <h2 class="end-title">The End.</h2>
             <span class="book__page-number">8</span>
         </div>
     </div>

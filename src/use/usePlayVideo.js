@@ -6,6 +6,7 @@ export const usePlayVideo = () => {
     const playVideo = () => {
         video.value.play();
     };
+
     const pauseVideo = () => {
         video.value.pause();
         video.value.currentTime = 0;

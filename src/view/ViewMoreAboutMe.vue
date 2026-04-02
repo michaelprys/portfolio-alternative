@@ -4,68 +4,51 @@
             <h1 class="title">More about me</h1>
             <div class="about">
                 <p class="about__text">
-                    Experienced in building web applications from scratch, solid
-                    understanding of modern HTML, CSS, JavaScript, and
-                    accessibility practices, a knowledge of GIT version control
-                    and pull request processes.
+                    Experienced in building web applications from scratch, solid understanding of
+                    modern HTML, CSS, JavaScript, and Vue.js, a knowledge of GIT version control and
+                    pull request workflows.
                 </p>
-                <h2 class="about__subtitle">Some facts</h2>
+                <h2 class="about__subtitle">Additional Info</h2>
                 <ul class="about__facts">
+                    <li class="about__fact">I'm passionate about learning foreign languages.</li>
                     <li class="about__fact">
-                        Former wushu Changquan martial artist.
+                        Practiced eastern martial arts, which taught me discipline and perseverance.
                     </li>
-                    <li class="about__fact">
-                        I make different genres of music such as RnB and
-                        Hip-Hop. Also, I like making samples using
-                        midi-keyboards and drumpads.
-                    </li>
-                    <li class="about__fact">
-                        Learning languages is my passion.
-                    </li>
-                    <li class="about__fact">
-                        Sometimes I play strategy games.
-                    </li>
-                    <li class="about__fact">I like asian food.</li>
                 </ul>
-                <h2 class="about__subtitle">Future plans</h2>
+                <h2 class="about__subtitle">Goals</h2>
                 <p class="about__text">
-                    I plan to learn more technologies, primarily Nuxt 3. Nuxt
-                    extends Vue with features like server-side rendering, link
-                    prefetching, auto-generated router configuration, and many
-                    other. It also includes convention over configuration for
-                    reducing the time spent on setting up the code. In my view,
-                    it is useful not only for productivity improvement, but also
-                    for building faster and more efficient Vue applications.
+                    I'm motivated to build functional, high-quality applications while constantly
+                    refining my development skills. I focus on being thorough and results-oriented,
+                    always ready to explore new technologies and approaches to achieve the best
+                    possible outcomes.
                 </p>
             </div>
 
             <span class="book__page-number">6</span>
 
-            <ItemTurnBtn
-                v-if="windowWidth > 1280"
-                @click="handleTurnPage('page3')">
-                <SvgBtnPrev />
-            </ItemTurnBtn>
+            <TurnButton v-if="windowWidth > 1280" @click="handleTurnPage('page3')">
+                <IconBtnPrev />
+            </TurnButton>
 
-            <ItemTurnBtn v-else @click="dropPage">
-                <SvgBtnDrop />
-            </ItemTurnBtn>
+            <TurnButton v-else @click="dropPage">
+                <IconBtnDrop />
+            </TurnButton>
         </div>
     </div>
 </template>
 
 <script setup>
-import ItemTurnBtn from '@/component/ItemTurnBtn.vue';
-import SvgBtnPrev from '@/component/svg/SvgBtnPrev.vue';
-import SvgBtnDrop from '@/component/svg/SvgBtnDrop.vue';
-import { inject } from 'vue';
+import TurnButton from '@/component/TurnButton.vue';
+import IconBtnDrop from '@/component/icons/IconBtnDrop.vue';
+import IconBtnPrev from '@/component/icons/IconBtnPrev.vue';
 import { useWindowSize } from '@vueuse/core';
+import { inject } from 'vue';
 
 const { width: windowWidth } = useWindowSize();
-const props = defineProps(['dropPage']);
+defineProps(['dropPage']);
 const turnPage = inject('turnPage');
 
-const handleTurnPage = page => {
+const handleTurnPage = (page) => {
     turnPage(page);
 };
 </script>
@@ -76,7 +59,6 @@ const handleTurnPage = page => {
     flex-direction: column;
     gap: $g-2;
     margin-top: $m-4;
-    font-size: $fs-medium;
     &__subtitle {
         font-size: $fs-h6;
         font-weight: 800;
@@ -90,8 +72,27 @@ const handleTurnPage = page => {
 @media (width <= $screen-sm) {
     .about {
         font-size: 0.75rem;
+        text-align: justify;
         &__subtitle {
             font-size: $fs-small;
+        }
+    }
+}
+
+@media (width >= $screen-xs) and (width <= $screen-sm) {
+    .about {
+        font-size: 0.71rem;
+        &__subtitle {
+            font-size: $fs-small;
+        }
+    }
+}
+@media (width <= $screen-xs) {
+    .about {
+        margin-top: $m-3;
+        font-size: 0.59rem;
+        &__subtitle {
+            font-size: $fs-smaller;
         }
     }
 }

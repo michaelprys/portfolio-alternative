@@ -2,7 +2,7 @@
     <video class="background-video" autoplay loop muted plays-inline>
         <source src="@img/decor/bg.mp4" type="video/mp4" />
     </video>
-    <ItemBgOverlay />
+    <BackgroundOverlay />
     <div class="container">
         <div class="book-wrapper">
             <div class="book-cover book-cover--left"></div>
@@ -95,7 +95,7 @@ import ViewMoreAboutMe from '@/view/ViewMoreAboutMe.vue';
 import ViewContact from '@/view/ViewContact.vue';
 import ViewEnd from '@/view/ViewEnd.vue';
 // other imports
-import ItemBgOverlay from '@/component/ItemBgOverlay.vue';
+import BackgroundOverlay from '@/component/BackgroundOverlay.vue';
 import { ref, watchEffect, onMounted, provide } from 'vue';
 import Sfx6 from '@/assets/sounds/page-shuffle.mp3?url';
 import { usePlaySfx } from '@/use/usePlaySfx';
@@ -128,32 +128,35 @@ const zIndexCounter = ref({
 
 const pages = Object.keys(pageStates.value);
 
-const turnPage = page => {
+const turnPage = (page) => {
     pageStates.value[page] = !pageStates.value[page];
     setTimeout(() => {
         updateZIndex(page);
     }, 500);
 };
 
-const updateZIndex = page => {
-    zIndexCounter.value[page] =
-        Math.max(...Object.values(zIndexCounter.value)) + 1;
+const updateZIndex = (page) => {
+    zIndexCounter.value[page] = Math.max(...Object.values(zIndexCounter.value)) + 1;
 };
 
 const isAnimationInProgress = ref(false);
+provide('isAnimationInProgress', isAnimationInProgress);
 
 const toLastPage = () => {
     if (!isAnimationInProgress.value) {
         isAnimationInProgress.value = true;
         pages.slice(0, 3).forEach((page, index) => {
-            setTimeout(() => {
-                turnPage(page);
-                if (index === 2) {
-                    setTimeout(() => {
-                        isAnimationInProgress.value = false;
-                    }, 1000);
-                }
-            }, 100 + 200 * index);
+            setTimeout(
+                () => {
+                    turnPage(page);
+                    if (index === 2) {
+                        setTimeout(() => {
+                            isAnimationInProgress.value = false;
+                        }, 1000);
+                    }
+                },
+                100 + 200 * index,
+            );
         });
         playSfx(Sfx6);
     }
@@ -164,14 +167,17 @@ const toIntroPage = () => {
         isAnimationInProgress.value = true;
         const reversedPages = pages.slice(0, 3).reverse();
         reversedPages.forEach((page, index) => {
-            setTimeout(() => {
-                turnPage(page);
-                if (index === 2) {
-                    setTimeout(() => {
-                        isAnimationInProgress.value = false;
-                    }, 1000);
-                }
-            }, 100 + 200 * index);
+            setTimeout(
+                () => {
+                    turnPage(page);
+                    if (index === 2) {
+                        setTimeout(() => {
+                            isAnimationInProgress.value = false;
+                        }, 1000);
+                    }
+                },
+                100 + 200 * index,
+            );
         });
         playSfx(Sfx6);
     }
@@ -182,9 +188,12 @@ provide('turnPage', turnPage);
 const openBook = () => {
     const reversedPages = [...pages].reverse();
     reversedPages.forEach((page, index) => {
-        setTimeout(() => {
-            turnPage(page);
-        }, 100 + 200 * index);
+        setTimeout(
+            () => {
+                turnPage(page);
+            },
+            100 + 200 * index,
+        );
     });
 };
 
@@ -209,7 +218,7 @@ onMounted(async () => {
     position: absolute;
     top: 0;
     left: 0;
-    min-height: 100vh;
+    min-block-size: 100svb;
     width: 100%;
     object-fit: cover;
     transition: opacity 1s ease-in-out;
@@ -217,8 +226,7 @@ onMounted(async () => {
 }
 // book-wrapper
 .book-wrapper {
-    display: flex;
-    justify-content: center;
+    transform: translate(-50%, -50%);
     border-radius: $br-8;
     margin-inline: auto;
     width: 75rem;
@@ -274,18 +282,14 @@ onMounted(async () => {
         height: 720px;
     }
     &__overlay--left {
-        @supports (
-            background-image: url('@img/decor/content/content-left.avif')
-        ) {
+        @supports (background-image: url('@img/decor/content/content-left.avif')) {
             background-image: url('@img/decor/content/content-left.avif');
         }
         background-image: url('@img/decor/content/content-left.jpg');
         filter: drop-shadow(-11px 10px 11px rgba(0, 0, 0, 0.329));
     }
     &__overlay--right {
-        @supports (
-            background-image: url('@img/decor/content/content-rightt.avif')
-        ) {
+        @supports (background-image: url('@img/decor/content/content-rightt.avif')) {
             background-image: url('@img/decor/content/content-right.avif');
         }
         background-image: url('@img/decor/content/content-right.jpg');
@@ -353,18 +357,14 @@ onMounted(async () => {
         }
         &--left {
             @include bg;
-            @supports (
-                background-image: url('@img/decor/content/content-left.avif')
-            ) {
+            @supports (background-image: url('@img/decor/content/content-left.avif')) {
                 background-image: url('@img/decor/content/content-left.avif');
             }
             background-image: url('@img/decor/content/content-left.jpg');
         }
         &--right {
             @include bg;
-            @supports (
-                background-image: url('@img/decor/content/content-right.avif')
-            ) {
+            @supports (background-image: url('@img/decor/content/content-right.avif')) {
                 background-image: url('@img/decor/content/content-right.avif');
             }
             background-image: url('@img/decor/content/content-right.jpg');
@@ -379,7 +379,7 @@ onMounted(async () => {
 }
 // common
 .title {
-    font-size: $fs-h3;
+    font-size: $fs-h4;
     text-align: center;
     font-family: $ff-primary-italic;
     line-height: 1;
