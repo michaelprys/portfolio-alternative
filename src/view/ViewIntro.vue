@@ -51,12 +51,12 @@
                 </div>
                 <div class="profile__buttons">
                     <a class="profile__link" :href="cvLink" target="_blank">Resume</a>
-                    <button type="button" class="profile__button" @click="toLastPage()">
+                    <button type="button" class="profile__button" @click="toLastPage">
                         Contact
                     </button>
                 </div>
             </div>
-            <TurnButton v-if="windowWidth <= 1280" @click="dropPage()">
+            <TurnButton v-if="windowWidth <= 1280" @click="dropPage">
                 <IconBtnDrop />
             </TurnButton>
         </div>
