@@ -52,7 +52,6 @@
 
 <script setup>
 import TurnButton from '@/component/TurnButton.vue';
-import IconAdobeXd from '@/component/icons/IconAdobeXd.vue';
 import IconBtnDrop from '@/component/icons/IconBtnDrop.vue';
 import IconBtnNext from '@/component/icons/IconBtnNext.vue';
 import IconFigma from '@/component/icons/IconFigma.vue';

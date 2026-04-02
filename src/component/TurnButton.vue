@@ -11,7 +11,7 @@ import Sfx3 from '@/assets/sounds/page-turn-3.mp3?url';
 import Sfx4 from '@/assets/sounds/page-turn-4.mp3?url';
 import Sfx5 from '@/assets/sounds/page-turn-5.mp3?url';
 import { usePlaySfx } from '@/use/usePlaySfx';
-import { inject, ref } from 'vue';
+import { inject } from 'vue';
 
 const { playSfx } = usePlaySfx();
 

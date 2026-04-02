@@ -11,7 +11,7 @@ import ViewPortfolioMobile from '@/view/ViewPortfolioMobile.vue';
 import { useWindowSize, useScreenOrientation } from '@vueuse/core';
 
 const { width: windowWidth } = useWindowSize();
-const { orientation } = useScreenOrientation();
+useScreenOrientation();
 </script>
 
 <style lang="scss"></style>
