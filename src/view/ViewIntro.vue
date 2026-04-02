@@ -10,7 +10,7 @@
                     <li>
                         <a
                             class="profile__social-link"
-                            href="https://www.linkedin.com/"
+                            href="https://www.linkedin.com/in/prysiazhnyi-dev"
                             target="_blank">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <circle cx="4.983" cy="5.009" r="2.188"></circle>
