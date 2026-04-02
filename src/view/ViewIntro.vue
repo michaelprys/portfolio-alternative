@@ -45,7 +45,7 @@
                     </li>
                 </ul>
                 <div class="profile__about">
-                    Developing responsive web applications with Vue.js, TypeScript, and modern CSS.
+                    Developing responsive web applications using Vue.js, TypeScript, and modern CSS.
                     I aim to build clean, functional interfaces while constantly improving my
                     technical skills through applied practice.
                 </div>
