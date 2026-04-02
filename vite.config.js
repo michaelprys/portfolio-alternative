@@ -5,6 +5,7 @@ import { fileURLToPath, URL } from 'url';
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 
 export default defineConfig({
+    base: '/',
     css: {
         preprocessorOptions: {
             scss: {
@@ -48,12 +49,8 @@ export default defineConfig({
     resolve: {
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url)),
-            '@img': fileURLToPath(
-                new URL('./src/assets/images', import.meta.url)
-            ),
-            '@fonts': fileURLToPath(
-                new URL('./public/fonts/', import.meta.url)
-            ),
+            '@img': fileURLToPath(new URL('./src/assets/images', import.meta.url)),
+            '@fonts': fileURLToPath(new URL('./public/fonts/', import.meta.url)),
         },
     },
 });
